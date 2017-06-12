@@ -12,6 +12,8 @@
 @interface FrequencyTableViewController ()
 /** dict  */
 @property (nonatomic, strong) NSMutableDictionary *dict;
+/** sort array  */
+@property (nonatomic, strong) NSArray *sortKeysArray;
 @end
 
 @implementation FrequencyTableViewController
@@ -20,10 +22,9 @@ static NSString *const CellID = @"frequency";
     [super viewDidLoad];
     
     WordFactory *factory = [[WordFactory alloc] init];
-    NSString *wordText = [factory getWordData];
-    NSArray *array = [factory getWordArrayFromStrings:wordText];
-    NSMutableDictionary *dict = [factory getWordFrequencyFrom:array];
+    NSMutableDictionary *dict = [factory getWordFrequencyDictIsCaseSensitive:NO];
     self.dict = dict;
+    self.sortKeysArray = [factory getSortKeys];
     
     self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 64, 0);
     [self.tableView registerNib:[UINib nibWithNibName:@"WordFrequencyCell" bundle:nil] forCellReuseIdentifier:CellID];
@@ -37,8 +38,10 @@ static NSString *const CellID = @"frequency";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WordFrequencyCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID forIndexPath:indexPath];
-    cell.wordLabel.text = self.dict.allKeys[indexPath.row];
-    cell.frequencyCountLabel.text = self.dict.allValues[indexPath.row];
+//    cell.wordLabel.text = self.dict.allKeys[indexPath.row];
+//    cell.frequencyCountLabel.text = self.dict.allValues[indexPath.row];
+    cell.wordLabel.text = [NSString stringWithFormat:@"%zd.%@", indexPath.row + 1, self.sortKeysArray[indexPath.row]];
+    cell.frequencyCountLabel.text = [self.dict objectForKey:self.sortKeysArray[indexPath.row]];
     return cell;
 }
 

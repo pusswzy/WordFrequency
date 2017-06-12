@@ -14,7 +14,7 @@
 {
     NSFileManager *manager = [NSFileManager defaultManager];
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"word" ofType:@"txt"];
-    NSLog(@"%@", filePath);
+    
     
     if ([manager fileExistsAtPath:filePath]) {
         NSString *str = [self getStringFrom:filePath];
@@ -23,9 +23,74 @@
         [NSException raise:NSGenericException format:@"word.txt did not exist in filePath"];
         return nil;
     }
-    
 }
 
+#pragma mark - wordHandle
+- (NSArray *)getWordArray
+{
+    NSString *txtStrings = [self getWordData];
+    NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@", . ; ( ) : — \n-"];
+    NSArray *originalWordArray = [txtStrings componentsSeparatedByCharactersInSet:characterSet];
+    NSArray *noBlankArray = [originalWordArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self <> ''"]];
+    return noBlankArray;
+}
+
+- (NSMutableDictionary *)getWordFrequencyDictIsCaseSensitive:(BOOL)isCaseSensitive
+{
+    NSArray *wordArray = [self getWordArray];
+    NSMutableArray *originalArray = [wordArray mutableCopy];//对原数组进行深拷贝 然后遍历
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    NSMutableArray *tempArray = [originalArray mutableCopy];
+    NSInteger times = 0;
+    //两点需要优化
+    //1.已经遍历的主单词 不应该在遍历一次了 [其实 不会多算的 removeObject其实就是移除所有相同的对象!!!!]
+    //2.已经判断等同性的单词应该从数组中删除掉才对
+
+    for (NSInteger i = 0; i <= originalArray.count; i++) {
+
+        i = 0;
+        NSString *compareWord = originalArray[i]; //就对original进行改变!!!
+        NSInteger count = 0;
+        for (NSString *word in originalArray) {
+            
+            if (isCaseSensitive == YES) {
+                if ([compareWord isEqualToString:word]) {
+                    count += 1;
+                    times += 1;
+                    [tempArray removeObject:word];
+                }
+            } else {
+                if ([compareWord caseInsensitiveCompare:word] == NSOrderedSame) {
+                    count += 1;
+                    times += 1;
+                    [tempArray removeObject:word];
+                }
+            }
+        }
+
+        originalArray = [tempArray mutableCopy];
+        dict[compareWord] = [NSString stringWithFormat:@"%zd", count];
+        NSLog(@"%zd>>>>>", times);
+    }
+    return dict;
+}
+
+- (NSArray *)getSortKeys
+{
+    NSMutableDictionary *dict = [self getWordFrequencyDictIsCaseSensitive:NO];
+    NSArray *sortArray = [dict keysSortedByValueUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        if ([obj1 integerValue] > [obj2 integerValue]) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        if ([obj1 integerValue] < [obj2 integerValue]) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    return sortArray;
+}
+
+#pragma mark - private method
 - (NSString *)getStringFrom:(NSString *)filePath
 {
     NSString *txtStrings = nil;
@@ -36,45 +101,5 @@
     }
     [fileHandle closeFile];
     return txtStrings;
-}
-
-#pragma mark - wordHandle
-- (NSArray *)getWordArrayFromStrings:(NSString *)txtStrings
-{
-    NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@", . ; ( ) : — \n-"];
-    NSArray *originalWordArray = [txtStrings componentsSeparatedByCharactersInSet:characterSet];
-    NSArray *noBlankArray = [originalWordArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self <> ''"]];
-    return noBlankArray;
-}
-
-- (NSMutableDictionary *)getWordFrequencyFrom:(NSArray *)wordArray
-{
-    
-    NSMutableArray *originalArray = [wordArray mutableCopy];//对原数组进行深拷贝 然后遍历
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    NSMutableArray *tempArray = [originalArray mutableCopy];
-    NSInteger times = 0;
-    //两点需要优化
-    //1.已经遍历的主单词 不应该在遍历一次了 [其实 不会多算的 removeObject其实就是移除所有相同的对象!!!!]
-    //2.已经判断等同性的单词应该从数组中删除掉才对
-    
-//    !!!!! 必须改成for in 套 for in
-    for (NSInteger i = 0; i < originalArray.count; i++) {
-        NSString *compareWord = originalArray[i]; //就对original进行改变!!!
-        NSInteger count = 0;
-        for (NSString *word in originalArray) {
-            
-            if ([compareWord isEqualToString:word]) {
-                count += 1;
-                times += 1;
-                [tempArray removeObject:word]; //这里不应该把原始值给删除了
-            }
-        }
-
-        originalArray = [tempArray mutableCopy];
-        dict[compareWord] = [NSString stringWithFormat:@"%zd", count];
-        
-    }
-    return dict;
 }
 @end

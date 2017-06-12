@@ -10,6 +10,7 @@
 
 @interface WordFactory : NSObject
 - (NSString *)getWordData;
-- (NSArray *)getWordArrayFromStrings:(NSString *)txtStrings;
-- (NSMutableDictionary *)getWordFrequencyFrom:(NSArray *)wordArray;
+- (NSArray *)getWordArray;
+- (NSMutableDictionary *)getWordFrequencyDictIsCaseSensitive:(BOOL)isCaseSensitive;
+- (NSArray *)getSortKeys;
 @end

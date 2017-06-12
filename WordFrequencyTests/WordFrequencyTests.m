@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-
+#import "WordFactory.h"
 @interface WordFrequencyTests : XCTestCase
 
 @end
@@ -25,8 +25,22 @@
 }
 
 - (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+    WordFactory *factory = [[WordFactory alloc] init];
+    NSMutableDictionary *dict = [factory getWordFrequencyDict];
+    XCTAssertNotNil(dict, @"dict == nil");
+}
+
+- (void)testFor {
+    int a = 5;
+    for (int i = 0; i < a; i++) {
+        i=0;
+        a -= 1;
+        NSLog(@"haha+ %zd------%zd", a, i);
+    }
+    
+    for (int i = 0; i < 10; i++) {
+        NSLog(@"%zd",i);
+    }
 }
 
 - (void)testPerformanceExample {
