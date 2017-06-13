@@ -75,9 +75,9 @@
     return dict;
 }
 
-- (NSArray *)getSortKeys
+- (NSArray *)getSortKeysFromDictionary:(NSMutableDictionary *)dictionary
 {
-    NSMutableDictionary *dict = [self getWordFrequencyDictIsCaseSensitive:NO];
+    NSMutableDictionary *dict = dictionary;
     NSArray *sortArray = [dict keysSortedByValueUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         if ([obj1 integerValue] > [obj2 integerValue]) {
             return (NSComparisonResult)NSOrderedAscending;

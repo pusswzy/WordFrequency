@@ -12,5 +12,5 @@
 - (NSString *)getWordData;
 - (NSArray *)getWordArray;
 - (NSMutableDictionary *)getWordFrequencyDictIsCaseSensitive:(BOOL)isCaseSensitive;
-- (NSArray *)getSortKeys;
+- (NSArray *)getSortKeysFromDictionary:(NSMutableDictionary *)dictionary;
 @end

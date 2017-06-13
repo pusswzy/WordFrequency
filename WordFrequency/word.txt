@@ -1,1 +1,11 @@
-love love love love love love love love love love love Study study Study study study study a The system sends many different notifications and events to the app delegate, letting the app delegate decide how best to respond to the incoming information and update the app. Most of these notifications correspond to app-level behaviors that might require you to update your app’s data or user interface or respond to a changed condition of the system. The way you handle these notifications depends on the architecture of your app. In many cases, the app delegate might not do anything more than notify other objects (such as your app’s view controllers) that they need to update themselves, but in some cases the app delegate might do the work itself.
+haha love love aaaaaa Return Value
+
+The view object that is the farthest descendent the current view and contains point. Returns nil if the point lies completely outside the receiver’s view hierarchy.
+
+Discussion
+
+This method traverses the view hierarchy by calling the pointInside:withEvent: method of each subview to determine which subview should receive a touch event. If pointInside:withEvent: returns YES, then the subview’s hierarchy is similarly traversed until the frontmost view containing the specified point is found. If a view does not contain the point, its branch of the view hierarchy is ignored. You rarely need to call this method yourself, but you might override it to hide touch events from subviews.
+
+This method ignores view objects that are hidden, that have disabled user interactions, or have an alpha level less than 0.01. This method does not take the view’s content into account when determining a hit. Thus, a view can still be returned even if the specified point is in a transparent portion of that view’s content.
+
+Points that lie outside the receiver’s bounds are never reported as hits, even if they actually lie within one of the receiver’s subviews. This can occur if the current view’s clipsToBounds property is set to NO and the affected subview extends beyond the view’s bounds.

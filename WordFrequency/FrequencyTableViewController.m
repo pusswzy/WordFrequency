@@ -24,7 +24,7 @@ static NSString *const CellID = @"frequency";
     WordFactory *factory = [[WordFactory alloc] init];
     NSMutableDictionary *dict = [factory getWordFrequencyDictIsCaseSensitive:NO];
     self.dict = dict;
-    self.sortKeysArray = [factory getSortKeys];
+    self.sortKeysArray = [factory getSortKeysFromDictionary:dict];
     
     self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 64, 0);
     [self.tableView registerNib:[UINib nibWithNibName:@"WordFrequencyCell" bundle:nil] forCellReuseIdentifier:CellID];
