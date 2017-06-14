@@ -21,7 +21,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Pkf-vL-gut"/>
-                        <segue destination="mRz-e1-jT5" kind="relationship" relationship="viewControllers" id="pJF-6M-YUg"/>
+                        <segue destination="GWF-4o-kw1" kind="relationship" relationship="viewControllers" id="a39-n8-uCL"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IS0-4w-8E8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -50,6 +50,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Resource里面的word.txt, 如需测试, 请更换文本里的文字" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DS3-6X-bxf">
+                                <rect key="frame" x="42" y="403" width="291" height="94"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -65,36 +72,56 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-506" y="-798"/>
+            <point key="canvasLocation" x="-506.39999999999998" y="-798.35082458770626"/>
         </scene>
-        <!--单词频率-->
-        <scene sceneID="3L2-1c-AdH">
+        <!--排序结果-->
+        <scene sceneID="wSp-57-Ndp">
             <objects>
-                <tableViewController id="mRz-e1-jT5" customClass="FrequencyTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="eLG-TB-xFK">
+                <navigationController id="GWF-4o-kw1" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="排序结果" badgeValue="1" id="8M0-GB-WY9"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NcC-d4-pYI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="DtQ-BV-Vdy" kind="relationship" relationship="rootViewController" id="ool-6U-wng"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ldZ-HT-s8i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1194" y="55"/>
+        </scene>
+        <!--Frequency Table View Controller-->
+        <scene sceneID="267-f8-XaU">
+            <objects>
+                <tableViewController id="DtQ-BV-Vdy" customClass="FrequencyTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="UEI-zQ-vuH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="zjQ-lh-5iz">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zjQ-lh-5iz" id="yNB-cs-TC6">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="mRz-e1-jT5" id="xeH-Wg-zs3"/>
-                            <outlet property="delegate" destination="mRz-e1-jT5" id="zYZ-e7-9r2"/>
+                            <outlet property="dataSource" destination="DtQ-BV-Vdy" id="7G8-Go-013"/>
+                            <outlet property="delegate" destination="DtQ-BV-Vdy" id="hEg-dG-euP"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="单词频率" id="dZi-He-ggM"/>
+                    <navigationItem key="navigationItem" id="r20-qB-CRe">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="VlY-Bu-3Tl">
+                            <rect key="frame" x="112.5" y="7" width="150" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="水"/>
+                                <segment title="人"/>
+                            </segments>
+                            <connections>
+                                <action selector="transform:" destination="DtQ-BV-Vdy" eventType="valueChanged" id="5TJ-xD-W3Y"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Pq4-o7-FHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BkU-ck-dcR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-506" y="-88"/>
+            <point key="canvasLocation" x="-476" y="160"/>
         </scene>
     </scenes>
 </document>

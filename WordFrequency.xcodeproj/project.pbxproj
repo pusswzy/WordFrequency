@@ -94,10 +94,8 @@
 		0AE036A51EEA468E007EC0AE /* WordFrequency */ = {
 			isa = PBXGroup;
 			children = (
+				0AE036DA1EF1253D007EC0AE /* Resource */,
 				0AE036D01EEA4816007EC0AE /* components */,
-				0AE036CB1EEA471E007EC0AE /* word.txt */,
-				0AE036A91EEA468E007EC0AE /* AppDelegate.h */,
-				0AE036AA1EEA468E007EC0AE /* AppDelegate.m */,
 				0AE036AC1EEA468E007EC0AE /* ViewController.h */,
 				0AE036AD1EEA468E007EC0AE /* ViewController.m */,
 				0AE036D11EEAB16E007EC0AE /* FrequencyTableViewController.h */,
@@ -106,9 +104,6 @@
 				0AE036D51EEAB35D007EC0AE /* WordFrequencyCell.m */,
 				0AE036D61EEAB35D007EC0AE /* WordFrequencyCell.xib */,
 				0AE036AF1EEA468E007EC0AE /* Main.storyboard */,
-				0AE036B21EEA468E007EC0AE /* Assets.xcassets */,
-				0AE036B41EEA468E007EC0AE /* LaunchScreen.storyboard */,
-				0AE036B71EEA468E007EC0AE /* Info.plist */,
 				0AE036A61EEA468E007EC0AE /* Supporting Files */,
 			);
 			path = WordFrequency;
@@ -117,6 +112,11 @@
 		0AE036A61EEA468E007EC0AE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0AE036A91EEA468E007EC0AE /* AppDelegate.h */,
+				0AE036AA1EEA468E007EC0AE /* AppDelegate.m */,
+				0AE036B21EEA468E007EC0AE /* Assets.xcassets */,
+				0AE036B41EEA468E007EC0AE /* LaunchScreen.storyboard */,
+				0AE036B71EEA468E007EC0AE /* Info.plist */,
 				0AE036A71EEA468E007EC0AE /* main.m */,
 			);
 			name = "Supporting Files";
@@ -138,6 +138,14 @@
 				0AE036CE1EEA4813007EC0AE /* WordFactory.m */,
 			);
 			name = components;
+			sourceTree = "<group>";
+		};
+		0AE036DA1EF1253D007EC0AE /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				0AE036CB1EEA471E007EC0AE /* word.txt */,
+			);
+			name = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

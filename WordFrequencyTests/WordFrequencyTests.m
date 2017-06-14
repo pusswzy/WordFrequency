@@ -2,8 +2,8 @@
 //  WordFrequencyTests.m
 //  WordFrequencyTests
 //
-//  Created by 李昊泽 on 2017/6/9.
-//  Copyright © 2017年 李昊泽. All rights reserved.
+//  Created by puss on 2017/6/9.
+//  Copyright © 2017年 puss. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
@@ -26,7 +26,7 @@
 
 - (void)testExample {
     WordFactory *factory = [[WordFactory alloc] init];
-    NSMutableDictionary *dict = [factory getWordFrequencyDict];
+    NSMutableDictionary *dict = [factory getWordFrequencyDictIsCaseSensitive:NO];
     XCTAssertNotNil(dict, @"dict == nil");
 }
 
